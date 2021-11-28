@@ -1,2 +1,4 @@
-aws-cdk.core>=1.131.0
-aws-cdk.assertions>=1.131.0
+aws-cdk.core==1.128.0
+aws-cdk.assertions==1.128.0
+aws_solutions_constructs.aws_cloudfront_s3==1.128.0
+aws_cdk.aws_s3_deployment==1.128.0

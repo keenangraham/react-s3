@@ -12,7 +12,7 @@ ENVIRONMENT = cdk.Environment(
     region=config['region'],
 )
 
-app = core.App()
+app = cdk.App()
 
 ReactS3Stack(
     app,

@@ -1,24 +1,23 @@
-from aws_cdk import (
-    core as cdk
-    # aws_sqs as sqs,
-)
-
-# For consistency with other languages, `cdk` is the preferred import name for
-# the CDK's core module.  The following line also imports it as `core` for use
-# with examples from the CDK Developer's Guide, which are in the process of
-# being updated to use `cdk`.  You may delete this import if you don't need it.
-from aws_cdk import core
+from aws_cdk import core as cdk
+from aws_solutions_constructs import aws_cloudfront_s3
+from aws_cdk import aws_s3_deployment
 
 
 class ReactS3Stack(cdk.Stack):
 
-    def __init__(self, scope: cdk.Construct, construct_id: str, **kwargs) -> None:
+    def __init__(self, scope, construct_id, **kwargs):
         super().__init__(scope, construct_id, **kwargs)
-
-        # The code that defines your stack goes here
-
-        # example resource
-        # queue = sqs.Queue(
-        #     self, "ReactS3Queue",
-        #     visibility_timeout=cdk.Duration.seconds(300),
-        # )
+        self.cloudfront_to_s3 = aws_cloudfront_s3.CloudFrontToS3(
+            self,
+            'ReactFrontend',
+        )
+        self.deployment = aws_s3_deployment.BucketDeployment(
+            self,
+            'S3FrontendDeployment',
+            sources=[
+                aws_s3_deployment.Source.asset('./react_s3/frontend/build/'),
+            ],
+            destination_bucket=self.cloudfront_to_s3.s3_bucket,
+            distribution=self.cloudfront_to_s3.cloud_front_web_distribution,
+            distribution_paths=['/*'],
+        )
