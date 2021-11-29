@@ -9,7 +9,14 @@ const DATA = {"@graph":[{"@id": "/expressions/ENCFF970BIN/ENSG00000115138.10/", 
 
 
 const extractFields = (datum) => {
-    return <li key={datum['@id']}>{datum.file['@id']} - {datum.gene.name} -  {datum.expression.tpm}</li>;
+    return (
+        <li key={datum['@id']}>
+            <span id="id">{datum.file['@id']}</span> {' - '}
+            <span id="gene">{datum.gene.symbol}</span> {' - '}
+            <span id="summary">{datum.dataset.biosample_summary}</span> {' - '}
+            <span id="tpm">{datum.expression.tpm}</span>
+        </li>
+    );
 };
 
 
