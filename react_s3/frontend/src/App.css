@@ -4,7 +4,6 @@
 
 
 .App-header {
-  background-color: #282c34;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -16,4 +15,17 @@
 
 .App-link {
   color: #61dafb;
+}
+
+input {
+    margin-bottom: 50px;
+    height: 35px;
+    width: 300px;
+    font-size: 1em;
+}
+
+
+li {
+    list-style: none;
+    color: black;
 }
